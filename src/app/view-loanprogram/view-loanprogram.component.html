@@ -1,0 +1,50 @@
+<div class="alert alert-success" *ngIf='message'>{{message}}</div>
+<div class="col-md-8 offset mt-4"> 
+ 
+    <input type="search"class="form-control col-md-4" name="" id="" aria-describedby="helpId" placeholder="Search here..." [(ngModel)]="searchValue">
+      <div class="row"> 
+        <h5 class="col-md-2">Search By</h5>
+        <div class="form-group">
+          <select class="form-control" name="" id="" [(ngModel)]="searchBy" (change)="getSortedData()">
+            <option value="loanType">Loan Type</option>
+        <option value="interestRate">Interest Rate</option>
+          </select>
+        </div>
+      </div>
+      <div class="row"> 
+      <h5 class="col-md-2">Sort By</h5>
+    <div class="form-group">
+      <select class="form-control" [(ngModel)]="fieldName" (change)="getSortedData()" >
+        <option value="loanType">Loan Type</option>
+        <option value="interestRate">Interest Rate</option>
+        
+      </select>
+    </div>
+ </div>
+  <table class="table table-bordered"> 
+    <tr> 
+      <th>Loan Type</th>
+      <th>Period</th>
+      <th>Age</th>
+      <th>Interest Rate</th>
+      <th>Actions</th>
+      
+
+    </tr> 
+    <tr *ngFor="let programs of program | search:searchValue:searchBy"> 
+      <td>{{programs.loanType}}</td>
+      <td>{{programs.age}}</td>
+      <td>{{programs.period}}</td>
+      <td>{{programs.interestRate}}</td>
+      <td><input type="submit"class="btn btn-outline-danger" (click)='deleteLoanprogram(programs)' value="delete">
+          <input type="submit"class="btn btn-outline-primary float-right" value="">
+      </td>
+     
+    </tr>
+  </table> 
+  <mat-paginator [length]="totalItems"[pageSize]="itemsPerPage"[pageSizeOptions]="[2,5, 10, 25, 100]"
+  (page)="getNextpageItems($event)">
+  </mat-paginator>
+
+
+</div>

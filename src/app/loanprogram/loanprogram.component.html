@@ -1,0 +1,48 @@
+<div class="alert alert-success" *ngIf='message'>{{ message }}</div>
+<div class="container-fluid col-md-4 mt-4"> 
+  <form #loanprogramForm="ngForm" (ngSubmit)='postProgram(loanprogramForm)' novalidate> 
+    <div class="card text-center">
+      <div class="card-header"> 
+       <h3><i>Loan Program</i></h3>
+      </div>
+      <div class="card-body">
+        <div class="form-group">
+          <label>Loan Type</label>
+          <select class="custom-select" name="loanType" id="type" ngModel #type="ngModel"
+           [class.is-invalid]="type.invalid && type.touched" required>
+            <option value="Construction Loan">Construction Loan</option>
+            <option value="Purchase Loan">Purchase Loan</option>
+            <option value="Plot Loan">Plot Loan</option>
+            <option value="Home Renovation Loan">Home Renovation Loan</option>
+          </select>
+          <small class="text-danger" [class.d-none]="type.valid || type.untouched">Please choose type</small>
+        </div>
+        <div class="form-group"> 
+          <label>Age</label>
+          <input required #age="ngModel" ngModel name="age" pattern="[0-9]{2}" type="text" class="form-control"
+             placeholder="Enter Age" [class.is-invalid]="age.invalid && age.touched">
+             <div *ngIf="age.invalid && age.touched"> 
+               <small *ngIf="age.errors?.required" class="text-danger">this field is required</small>
+               <small *ngIf="age.errors?.pattern" class="text-danger">in digits</small>
+             </div>
+        </div>
+        <div class="form-group">
+          <label>period</label>
+          <input type="text" #period="ngModel" required pattern="[0-9]{2}"  [class.is-invalid]='period.invalid && period.touched'
+           class="form-control" placeholder="Enter period" name="period" ngModel>
+           <div *ngIf="period.invalid && period.touched"> 
+             <small class="text-danger"*ngIf="period.errors.required">this field is required</small>
+             <small class="text-danger" *ngIf="period.errors.pattern">must be in years and 2 digits allowed</small>
+           </div>
+        </div>
+        <div class="form-group">
+          <label>Interest Rate</label>
+          <input type="number" ngModel #rate="ngModel" name="interestRate" class="form-control" placeholder="Enter Interest Rate">
+        </div>
+      </div>
+      <div class="card-footer text-muted">
+        <button class="btn btn-warning" style="box-sizing: unset;" type="submit"  [disabled]="loanprogramForm.invalid" >Add</button>
+      </div>
+    </div>
+  </form>
+</div>

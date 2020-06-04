@@ -1,0 +1,65 @@
+<div class="row justify-content-center">
+  
+  <div class="col-auto">
+    <div class="row">
+      <label class="sr-only" for="inlineFormInputGroup">search</label>
+      <div class="input-group mb-4">
+        <div class="input-group-prepend search">
+          <div class="input-group-text">search</div>
+        </div>
+        <input type="text" class="form-control col-md-2" id="inlineFormInputGroup" [(ngModel)]="searchValue">
+      </div>
+    </div>
+    <div class="row">
+      <h5 class="col-md-2">Sort by</h5>
+      <div class="form-group">
+        <select class="form-control" name="" id="" [(ngModel)]="fieldName" (change)="getSortedData()">
+          <option value="fullName">Full Name</option>
+        </select>
+      </div>
+    </div>
+    <table class="table table-bordered table-hover">
+      <thead class="table-light">
+        <tr>
+         
+          <th scope="col">Full name</th>
+          <th scope="col">Email</th>
+          <!-- <th scope="col">Password</th> -->
+          <th scope="col">Age</th>
+          <th scope="col">Gender</th>
+          <th scope="col">Mobile Number</th>
+          <th scope="col">PAN Number</th>
+          <!-- <th scope="col">Role</th> -->
+          <th scope="col">Loan Type</th>
+          <th scope="col">Loan Amount</th>
+          <th scope="col">Application Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <ng-container *ngFor='let loanforms of loanform| search:searchValue'>
+          <ng-container *ngFor='let applicants of loanforms.applicant'>
+              <tr>
+                <td>{{users.userId}}</td>
+                <td>{{loanforms.fullName}}</td>
+                <td>{{loanforms.email}}</td>
+                <!-- <td>{{users.password}}</td> -->
+                <td>{{loanforms.age}}</td>
+                <td>{{loanforms.gender}}</td>
+                <td>{{loanforms.mobileNumber}}</td>
+                <td>{{loanforms.panNumber}}</td>
+                <!-- <td>{{users.role}}</td> -->
+                <!-- <td>{{applicants.appId}}</td> -->
+                <td>{{applicants.loanType}}</td>
+                <td>{{applicants.loanAmount}}</td>
+                <td>{{applicants.applicationStatus}}</td>
+              </tr>
+          </ng-container>
+        </ng-container>
+      </tbody>
+    </table>
+    <!-- <pagination-controls (pageChange)="p = $event"></pagination-controls> -->
+    <mat-paginator [length]="totalItems" [pageSize]="itemsPerPage" [pageSizeOptions]="[2, 5, 10, 25, 100]"
+    (page)="getNextPageItems($event)">
+  </mat-paginator>
+  </div>
+</div>

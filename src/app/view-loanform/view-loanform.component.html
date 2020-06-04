@@ -1,0 +1,64 @@
+<div class="alert alert-success" *ngIf='message'>{{message}}</div>
+<div class="col-md-8 offset mt-4"> 
+  
+  <input type="search" class="form-control col-md-4" name="" id="" aria-describedby="helpId" placeholder="Search here..." [(ngModel)]="searchValue">
+  <div class="row"> 
+    <h5 class="col-md-2">Search By</h5>
+    <div class="form-group">
+      <select class="form-control" name="" id="" [(ngModel)]="searchBy" (change)="getSortedData()">
+        <option value="fullName">Name</option>
+        <option value="salary">Salary</option>
+        <option value="age">Age</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="row"> 
+    <h6 class="col-md-2">Sort By</h6>
+    <div class="form-group">
+      <select class="form-control" name="" id="" [(ngModel)]="fieldName" (change)="getSortedData()">
+        <option value="fullName">Name</option>
+        <option value="salary">Salary</option>
+        <option value="age">Age</option>
+      </select>
+    </div>
+
+  </div>
+     <table class="table table-bordered"> 
+        <tr> 
+          <th>Loan Id</th>
+          <th>FullName</th>
+          <th>Email</th>
+          <th>Password</th>
+          <th>Gender</th>
+          <th>Age</th>
+          <th>Mobile Number</th>
+          <th>PAN Number</th>
+          <th>Loan Type</th>
+          <th>Address</th>
+          <th>Loan Amount</th>
+          <th>Salary</th>
+          <th>Status</th>
+          <th>Role</th>
+        </tr>
+        <tr *ngFor="let forms of form | search:searchValue:searchBy"> 
+          <td>{{forms.loanId}}</td>
+          <td>{{forms.fullName}}</td>
+          <td>{{forms.email}}</td>
+          <td>{{forms.password}}</td>
+          <td>{{forms.gender}}</td>
+          <td>{{forms.age}}</td>
+          <td>{{forms.mobileNumber}}</td>
+          <td>{{forms.panNumber}}</td>
+          <td>{{forms.loanType}}</td>
+          <td>{{forms.address}}</td>
+          <td>{{forms.loanAmount}}</td>
+          <td>{{forms.salary}}</td>
+          <td>{{forms.status}}</td>
+          <td>{{forms.role}}</td>
+        </tr>
+      </table> 
+   <mat-paginator [length]="totalItems" [pageSize]="itemsPerPage" [pageSizeOptions]="[2,5, 10, 25, 100]" 
+     (page)= "getNextPageItems($event)">
+   </mat-paginator>
+</div>

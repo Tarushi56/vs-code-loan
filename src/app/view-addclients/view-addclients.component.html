@@ -1,0 +1,44 @@
+<div class="alert alert-success" *ngIf='message'>{{message}}</div>
+<div class="col-md-8 offset mt-4"> 
+   
+  <input type="search" class="form-control col-md-4 " name="" id="" aria-describedby="helpId" placeholder="Search here..." [(ngModel)]="searchValue">
+  <div class="row"> 
+    <h5 class="col-md-2">Search By</h5>
+    <div class="form-group">
+      <select class="form-control" name="" id="" [(ngModel)]="searchBy" (change)="getSortedData()">
+        <option value="fullName">FullName</option>
+        <option value="role">Role</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="row"> 
+    <h5 class="col-md-2">Sort By</h5>
+    <div class="form-group">
+      <select class="form-control" name="" id="" [(ngModel)]="fieldName" (change)="getSortedData()">
+        <option value="fullName">FullName</option>
+        <option value="role">Role</option>
+      </select>
+    </div>
+  </div>
+  <table class="table table-bordered"> 
+    <th>FullName</th>
+    <th>Email</th>
+    <!-- <th>Password</th> -->
+    <th>Phone Number</th>
+    <th>Role</th>
+    <th>Delete</th>
+    <tr *ngFor="let clients of client | search:searchValue: searchBy"> 
+      <td>{{clients.fullName}}</td>
+      <td>{{clients.email}}</td>
+      <!-- <td>{{clients.password}}</td> -->
+      <td>{{clients.phone}}</td>
+      <td>{{clients.role}}</td>
+      <td><input type="submit"class="btn btn-outline-danger"(click)='deleteClient(clients)'value="delete"></td>
+    </tr>
+  </table>
+  <mat-paginator [length]="totalItems"[pageSize]="itemsPerPage"[pageSizeOptions]="[2,5, 10, 25, 100]"
+  (page)="getNextpageItems($event)">
+  </mat-paginator>
+
+</div>
